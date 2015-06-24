@@ -13,4 +13,11 @@ window.Calaca = angular.module('calaca', ['elasticsearch', 'ngAnimate'],
     ['$locationProvider', function($locationProvider){
         $locationProvider.html5Mode(true);
     }]
+).filter('to_trusted', ['$sce', function($sce){
+        return function(text) {
+            return $sce.trustAsHtml(text);
+        };
+    }]
 );
+
+

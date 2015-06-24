@@ -56,7 +56,7 @@ Calaca.factory('calacaService', ['$q', 'esFactory', '$location', function($q, el
                     source._score = hitsIn[i]._score;
                     highlight = hitsIn[i].highlight;
                     if (highlight.body)
-                        source.body = highlight.body[0];
+                        source.body = highlight.body[0]
                     hitsOut.push(source);
                 }
                 deferred.resolve({ timeTook: result.took, hitsCount: result.hits.total, hits: hitsOut });

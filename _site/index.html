@@ -29,7 +29,7 @@
     <p class='no-results' ng-show='!results.length && !loading'>No Results</p>
     <article class='result' ng-repeat='result in results track by $id(result)'>
       <a href="{{result.url}}" target="_blank"><h2>{{result.title}}</h2></a>
-      <p>{{result.body}}<b>blah</b></p>
+      <p ng-bind-html="result.body | to_trusted"></p>
     </article>
   </section>
   <section class='pagination-controls'>
