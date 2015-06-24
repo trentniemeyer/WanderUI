@@ -39,8 +39,11 @@ Calaca.factory('calacaService', ['$q', 'esFactory', '$location', function($q, el
                         }
                     },
                     "highlight": {
+                        "pre_tags": ["<span style='font-weight:600'>"],
+                        "post_tags": ["</span>"],
+                        "order" : "score",
                         "fields": {
-                          "body": {}
+                          "body": {"fragment_size" : 150, "number_of_fragments" : 3}
                         }
                     }
                 }
@@ -56,7 +59,14 @@ Calaca.factory('calacaService', ['$q', 'esFactory', '$location', function($q, el
                     source._score = hitsIn[i]._score;
                     highlight = hitsIn[i].highlight;
                     if (highlight.body)
-                        source.body = highlight.body[0]
+                    {
+                        source.body = '...' + highlight.body[0] + '... ';
+                        if (highlight.body.length > 1)
+                        {                               
+                            for (var j = 1; j < highlight.body.length; j++)
+                                source.body += highlight.body[j] + '... ';
+                        }
+                    }
                     hitsOut.push(source);
                 }
                 deferred.resolve({ timeTook: result.took, hitsCount: result.hits.total, hits: hitsOut });
