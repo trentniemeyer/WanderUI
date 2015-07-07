@@ -20,24 +20,53 @@ Calaca.factory('calacaService', ['$q', 'esFactory', '$location', function($q, el
 
         var deferred = $q.defer();
 
-        if (query.length == 0) {
+        if (query.general.length==0) {
             deferred.resolve({ timeTook: 0, hitsCount: 0, hits: [] });
             return deferred.promise;
         }
 
-        client.search({
+        seachObj = {
                 "index": CALACA_CONFIGS.index_name,
                 "type": CALACA_CONFIGS.type,
                 "body": {
-                    "size": CALACA_CONFIGS.size,
-                    "from": offset,
-                    "query": {
-                        "multi_match": {
-                            "query":  query,
-                            "type":   "most_fields", 
-                            "fields": [ "title", "body" ]
+                     "query": {
+                        "filtered": {
+                          "query": {
+                            
+                            "function_score": {
+                              "query": {
+                                "multi_match": {
+                              "query": query.general,
+                              "type": "best_fields", 
+                              "fields": ["title", "body"]
+                            }  
+                              },                              
+                              "functions": [
+                                { 
+                                  "linear": {
+                                    "postdate": {
+                                      "origin": "now",
+                                      "scale": "90d",
+                                      "decay": 0.5
+                                    }},
+                                    
+                                    "linear": {
+                                      "length": {
+                                        "origin": 10000,
+                                        "scale": 5000,
+                                        "decay": 0.5
+                                      }}
+                                }
+                              ],
+                              "boost_mode": "replace"
+                              
+                            }
+                          },
+                          "filter": {
+                            "term": {"country": query.country,"_cache": true}
+                          }
                         }
-                    },
+                      },
                     "highlight": {
                         "pre_tags": ["<span style='font-weight:600'>"],
                         "post_tags": ["</span>"],
@@ -47,7 +76,17 @@ Calaca.factory('calacaService', ['$q', 'esFactory', '$location', function($q, el
                         }
                     }
                 }
-        }).then(function(result) {
+        }
+
+        if ( typeof query.country == 'undefined' || query.country === '')
+        {
+            delete seachObj.body.query.filtered.filter;
+            console.log ('removed filter')
+        }
+
+        console.log (seachObj);
+
+        client.search(seachObj).then(function(result) {
 
                 var i = 0, hitsIn, hitsOut = [], source, highlight;
                 hitsIn = (result.hits || {}).hits || [];

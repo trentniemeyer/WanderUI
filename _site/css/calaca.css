@@ -39,7 +39,7 @@ body {
   border-radius: 5px;
 }
 .search-box {
-  width: 812px;
+  
   height: 100%;
   color: #000;
   background-color: #fff;
@@ -50,25 +50,21 @@ body {
   border-radius: 5px;
   border: 4px solid #bd16aa;
 }
+.searchbox-country
+{
+  width: 232px;
+}
+.searchbox-interests
+{
+  width: 527px;
+}
 
 /* Default Browser Overrides */
 a:-webkit-any-link{
   text-decoration:none !important;
 }
 
-/* Search Box Placeholder text */
-::-webkit-input-placeholder {
-   color: #ecf0f1;
-}
-:-moz-placeholder {
-   color: #ecf0f1;
-}
-::-moz-placeholder {
-   color: #ecf0f1;
-}
-:-ms-input-placeholder {  
-   color: #ecf0f1;  
-}
+
 /* Header */
 
 /* Results */

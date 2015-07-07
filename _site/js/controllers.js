@@ -12,6 +12,7 @@
  *
  * On change in search box, search() will be called, and results are bind to scope as results[]
  *
+ TODO: Try Google AutoComplete for Country: http://plnkr.co/edit/il2J8qOI2Dr7Ik1KHRm8?p=preview
 */
 Calaca.controller('calacaCtrl', ['calacaService', '$scope', '$location', function(results, $scope, $location){
 

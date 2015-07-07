@@ -14,8 +14,9 @@
 <!-- Title and search box -->
 <header class='jumbotron'>
   <h1 class='title'>Blog Search</h1>
-  <div class='search-box-container'>
-    <input type='text' class='search-box' placeholder='Search' autofocus ng-model='query' ng-change='delayedSearch(0)'>
+  <div class='search-box-container'>    
+    <input type="text" class="search-box searchbox-country" placeholder="Which Country?" ng-model='query.country'>
+    <input type='text' class='search-box searchbox-interests' placeholder='General Search' autofocus ng-model='query.general' ng-change='delayedSearch(0)'>
   </div>
 </header>
 
@@ -41,6 +42,7 @@
 </main>
 
 <!-- Load resources -->
+
 <script src='bower_components/angular/angular.min.js' type='text/javascript'></script>
 <script src='bower_components/angular-animate/angular-animate.min.js' type='text/javascript'></script>
 <script src='bower_components/elasticsearch/elasticsearch.angular.min.js' type='text/javascript'></script>
@@ -48,5 +50,8 @@
 <script src='js/app.js' type='text/javascript'></script>
 <script src='js/controllers.js' type='text/javascript'></script>
 <script src='js/services.js' type='text/javascript'></script>
+
+
+
 </body>
 </html>
