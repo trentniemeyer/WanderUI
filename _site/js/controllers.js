@@ -21,6 +21,17 @@ Calaca.controller('calacaCtrl', ['calacaService', '$scope', '$location', functio
 
         //Init offset
         $scope.offset = 0;
+        $scope.query = {"general":'',"country":''};
+        var countries = [
+          "South Africa",
+          "Mauritius",
+          "Botswana",
+          "Zambia",
+          "Namibia",
+          "Swaziland",
+          "Tanzania",
+          "Zimbabwe"
+        ];
 
         var paginationTriggered;
         var maxResultsSize = CALACA_CONFIGS.size;
@@ -32,6 +43,16 @@ Calaca.controller('calacaCtrl', ['calacaService', '$scope', '$location', functio
                 $scope.search(mode)
             }, CALACA_CONFIGS.search_delay);
         }
+
+         $scope.countryChanged = function  ($event) {              
+            if ( typeof $scope.query.general !== '' && $scope.query.country !== '' && $event.keyCode === 13)
+            {
+                clearTimeout(searchTimeout);
+                searchTimeout = setTimeout(function() {
+                    $scope.search(0)
+                }, CALACA_CONFIGS.search_delay);
+            }
+         }
 
         //On search, reinitialize array, then perform search and load results
         $scope.search = function(m){
@@ -81,8 +102,25 @@ Calaca.controller('calacaCtrl', ['calacaService', '$scope', '$location', functio
 
         $scope.paginationEnabled = function() {
             return paginationTriggered ? true : false;
-        };
+        };        
 
+        function suggest_country(term) {
+            var q = term.toLowerCase().trim();
+            var results = [];
+
+            // Find first 10 states that start with `term`.
+            for (var i = 0; i < countries.length && results.length < 10; i++) {
+              var country = countries[i];
+              if (country.toLowerCase().indexOf(q) === 0)
+                results.push({ label: country, value: country });
+            }
+
+            return results;
+        }
+
+        $scope.autocomplete_options = {
+            suggest: suggest_country
+        };
 
     }]
 );

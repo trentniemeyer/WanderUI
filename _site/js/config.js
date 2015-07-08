@@ -19,7 +19,7 @@
  */
 
 var CALACA_CONFIGS = {
-	url: "http://localhost:9200",
+	url: "http://137.135.93.224:9200",
 	index_name: "blogs",
 	type: "blog",
 	size: 10,

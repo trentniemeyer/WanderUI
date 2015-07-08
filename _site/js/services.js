@@ -78,13 +78,9 @@ Calaca.factory('calacaService', ['$q', 'esFactory', '$location', function($q, el
                 }
         }
 
-        if ( typeof query.country == 'undefined' || query.country === '')
-        {
+        if ( typeof query.country == 'undefined' || query.country === '')    
             delete seachObj.body.query.filtered.filter;
-            console.log ('removed filter')
-        }
-
-        console.log (seachObj);
+    
 
         client.search(seachObj).then(function(result) {
 
