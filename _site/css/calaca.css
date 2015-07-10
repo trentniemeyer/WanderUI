@@ -20,19 +20,20 @@ body {
 
 /* Header */
 .jumbotron {
-  height: 280px;
+  height: 300px;
   width: 100%;
-  background-color: #aabd16;
+  /*background-color: #aabd16;*/
+  background-image: url(../images/HeroImage.jpg);
 }
 .title {
   font-size: 40px;
-  color: #bd16aa;
+  color: #ecf0f1;
   text-align: center;
-  padding-top: 70px;
+  padding-top: 100px;
 }
 .search-box-container {
   width: 860px;
-  height: 69px;
+  height: 60px;
   margin-left: auto;
   margin-right: auto;
   margin-top: 60px;
