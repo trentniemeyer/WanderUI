@@ -24,13 +24,19 @@ Calaca.controller('calacaCtrl', ['calacaService', '$scope', '$location', functio
         $scope.query = {"general":'',"country":''};
         var countries = [
           "South Africa",
+          "Morocco",
+          "Kenya",
+          "Ghana",
+          "Tanzania",
+          "Tunisia",
+          "Algeria",
+          "Zimbabwe",
+          "Uganda",
+          "Namibia",
           "Mauritius",
           "Botswana",
-          "Zambia",
-          "Namibia",
-          "Swaziland",
-          "Tanzania",
-          "Zimbabwe"
+          "Zambia",          
+          "Swaziland"
         ];
 
         var paginationTriggered;
