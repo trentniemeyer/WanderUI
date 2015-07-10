@@ -29,52 +29,54 @@ Calaca.factory('calacaService', ['$q', 'esFactory', '$location', function($q, el
                 "index": CALACA_CONFIGS.index_name,
                 "type": CALACA_CONFIGS.type,
                 "body": {
-                     "query": {
-                        "filtered": {
-                          "query": {
-                            
-                            "function_score": {
-                              "query": {
-                                "multi_match": {
-                              "query": query.general,
-                              "type": "best_fields", 
-                              "fields": ["title", "body"],
-                              "minimum_should_match": "100%"
-                            }  
-                              },                              
-                              "functions": [
-                                { 
+                    "size": CALACA_CONFIGS.size,
+                    "from": offset,
+                    "query": {
+                      "filtered": {
+                        "query": {
+                          
+                          "function_score": {
+                            "query": {
+                              "multi_match": {
+                            "query": query.general,
+                            "type": "best_fields", 
+                            "fields": ["title^2", "body"],
+                            "minimum_should_match": "100%"
+                          }  
+                            },                              
+                            "functions": [
+                              { 
+                                "linear": {
+                                  "postdate": {
+                                    "origin": "now",
+                                    "scale": "90d",
+                                    "decay": 0.5
+                                  }},
+                                  
                                   "linear": {
-                                    "postdate": {
-                                      "origin": "now",
-                                      "scale": "90d",
+                                    "length": {
+                                      "origin": 10000,
+                                      "scale": 5000,
                                       "decay": 0.5
-                                    }},
-                                    
-                                    "linear": {
-                                      "length": {
-                                        "origin": 10000,
-                                        "scale": 5000,
-                                        "decay": 0.5
-                                      }}
-                                }
-                              ],
-                              "boost_mode": "sum"
-                              
-                            }
-                          },
-                          "filter": {
-                            "term": {"country": query.country,"_cache": true}
+                                    }}
+                              }
+                            ],
+                            "boost_mode": "sum"
+                            
                           }
+                        },
+                        "filter": {
+                          "term": {"country": query.country,"_cache": true}
                         }
-                      },
+                      }
+                    },
                     "highlight": {
-                        "pre_tags": ["<span style='font-weight:600'>"],
-                        "post_tags": ["</span>"],
-                        "order" : "score",
-                        "fields": {
-                          "body": {"fragment_size" : 150, "number_of_fragments" : 3}
-                        }
+                      "pre_tags": ["<span style='font-weight:600'>"],
+                      "post_tags": ["</span>"],
+                      "order" : "score",
+                      "fields": {
+                        "body": {"fragment_size" : 150, "number_of_fragments" : 3}
+                      }
                     }
                 }
         }
@@ -94,7 +96,7 @@ Calaca.factory('calacaService', ['$q', 'esFactory', '$location', function($q, el
                     source._type = hitsIn[i]._type;
                     source._score = hitsIn[i]._score;
                     highlight = hitsIn[i].highlight;
-                    if (highlight.body)
+                    if (highlight && "body" in highlight)
                     {
                         source.body = '...' + highlight.body[0] + '... ';
                         if (highlight.body.length > 1)
@@ -102,6 +104,10 @@ Calaca.factory('calacaService', ['$q', 'esFactory', '$location', function($q, el
                             for (var j = 1; j < highlight.body.length; j++)
                                 source.body += highlight.body[j] + '... ';
                         }
+                    }
+                    else
+                    {
+                      source.body = source.body.substring(0, 150) + "..."
                     }
                     hitsOut.push(source);
                 }
