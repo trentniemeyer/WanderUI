@@ -38,7 +38,8 @@ Calaca.factory('calacaService', ['$q', 'esFactory', '$location', function($q, el
                                 "multi_match": {
                               "query": query.general,
                               "type": "best_fields", 
-                              "fields": ["title", "body"]
+                              "fields": ["title", "body"],
+                              "minimum_should_match": "100%"
                             }  
                               },                              
                               "functions": [
@@ -58,7 +59,7 @@ Calaca.factory('calacaService', ['$q', 'esFactory', '$location', function($q, el
                                       }}
                                 }
                               ],
-                              "boost_mode": "replace"
+                              "boost_mode": "sum"
                               
                             }
                           },
