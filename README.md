@@ -1,0 +1,1 @@
+This has been customized to fit my site needs.  Biggest changes include a seperate search field, custom search boosting, and new look and feel.  Includes hacks for including other Angular modules and non-Bower dependencies.  It's rough.
