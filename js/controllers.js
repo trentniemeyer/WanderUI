@@ -92,7 +92,7 @@ Calaca.controller('calacaCtrl', ['calacaService', '$scope', '$location', functio
             $scope.paginationLowerBound = $scope.offset + 1;
             $scope.paginationUpperBound = ($scope.offset == 0) ? maxResultsSize : $scope.offset + maxResultsSize;
             
-            searchStarted = performance.now();
+            searchStarted = new Date ();
             $scope.loadResults(m);
         };
 
@@ -100,8 +100,8 @@ Calaca.controller('calacaCtrl', ['calacaService', '$scope', '$location', functio
         $scope.loadResults = function(m) {
             results.search($scope.query, m, $scope.offset).then(function(a) {
 
-                searchEnded = performance.now ();
-                wireTimeTook = searchEnded - searchStarted;
+                searchEnded = new Date ();
+                wireTimeTook = searchEnded.getTime() - searchStarted.getTime();
 
                 mixpanel.track("Search", 
                   {
