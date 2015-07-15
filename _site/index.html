@@ -57,7 +57,7 @@
         <p ng-show='paginationEnabled()' id='pagination-details'>Showing {{paginationLowerBound}} - {{paginationUpperBound}}</p>
       </section>
       <section class='results'>
-        <p class='no-results' ng-show='!results.length && !loading'>No Results</p>
+        <p class='no-results' ng-show='!results.length && !loading'></p>
         <article class='result' ng-repeat='result in results track by $id(result)'>
           <img style="max-width:150px;max-height:150px;" src="http://wanderight.blob.core.windows.net/blogparse/images/{{result._id}}" on-error-src="https://lh3.googleusercontent.com/eUXQi-EUdjmD-ieE8EtWLX4z_iLdxqM3pLP6rNSRPA=s150-no">
           <div style="float:right;width: 650px">

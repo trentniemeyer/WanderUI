@@ -23,10 +23,11 @@ background-color: #ecf0f1;
 }
 .wrapper {
 min-height: 100%;
-margin: 0 auto -36px;
+margin: 0 auto -39px;
 }
 .footer, .push {
-height: 36px;
+height: 39px;
+margin-left:3px;
 }
 
 
@@ -99,6 +100,8 @@ a:-webkit-any-link{
 }
 #response-details{
   float: left;
+  font-size: 1em;
+  color: grey;
 }
 #pagination-details {
   float: right;
