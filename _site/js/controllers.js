@@ -22,6 +22,8 @@ Calaca.controller('calacaCtrl', ['calacaService', '$scope', '$location', functio
         //Init offset
         $scope.offset = 0;
         $scope.query = {"general":'',"country":''};
+        
+        //TODO: Move this to AJAX Service
         var countries = [
           "South Africa",
           "Morocco",
@@ -55,6 +57,8 @@ Calaca.controller('calacaCtrl', ['calacaService', '$scope', '$location', functio
         var paginationTriggered;
         var maxResultsSize = CALACA_CONFIGS.size;
         var searchTimeout;
+        var searchStarted;
+        var searchEnded;
 
         $scope.delayedSearch = function(mode) {
             clearTimeout(searchTimeout);
@@ -87,12 +91,24 @@ Calaca.controller('calacaCtrl', ['calacaService', '$scope', '$location', functio
             }
             $scope.paginationLowerBound = $scope.offset + 1;
             $scope.paginationUpperBound = ($scope.offset == 0) ? maxResultsSize : $scope.offset + maxResultsSize;
+            
+            searchStarted = performance.now();
             $scope.loadResults(m);
         };
 
         //Load search results into array
         $scope.loadResults = function(m) {
             results.search($scope.query, m, $scope.offset).then(function(a) {
+
+                searchEnded = performance.now ();
+                wireTimeTook = searchEnded - searchStarted;
+
+                mixpanel.track("Search", 
+                  {
+                    "Country": $scope.query.country, "General": $scope.query.general, "Page" : $scope.offset,
+                    "WireTimeTake": wireTimeTook, "RawQueryTimeTaken": a.timeTook, "Count": a.hitsCount
+                  }
+                );
 
                 //Load results
                 var i = 0;
