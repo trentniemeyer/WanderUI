@@ -18,6 +18,8 @@ margin: 0;
 }
 html, body {
 height: 100%;
+font-family: "Arial";
+background-color: #ecf0f1;
 }
 .wrapper {
 min-height: 100%;
