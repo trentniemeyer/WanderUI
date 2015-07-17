@@ -51,7 +51,8 @@ Calaca.controller('calacaCtrl', ['calacaService', '$scope', '$location', functio
           "Mauritania",
           "Nigeria",          
           "Swaziland",
-          "Madagascar"
+          "Madagascar",
+          "Congo"
         ];
 
         var paginationTriggered;
