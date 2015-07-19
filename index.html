@@ -61,8 +61,10 @@
       <section class='results'>
         <p class='no-results' ng-show='!results.length && !loading'></p>
         <article class='result' ng-repeat='result in results track by $id(result)'>
-          <img style="max-width:150px;max-height:150px;" src="http://wanderight.blob.core.windows.net/blogparse/images/{{result._id}}" on-error-src="https://lh3.googleusercontent.com/eUXQi-EUdjmD-ieE8EtWLX4z_iLdxqM3pLP6rNSRPA=s150-no">
-          <div style="float:right;width: 650px">
+          <div style="float:left;width:150px;">
+            <img style="max-width:150px;max-height:150px;" src="http://wanderight.blob.core.windows.net/blogparse/images/{{result._id}}" on-error-src="https://lh3.googleusercontent.com/eUXQi-EUdjmD-ieE8EtWLX4z_iLdxqM3pLP6rNSRPA=s150-no">
+          </div>
+          <div style="margin-left:180px;">
             <a href="{{result.url}}" target="_blank"><h2>{{result.title}}</h2></a>
             <p ng-bind-html="result.body | to_trusted"></p>
           </div>
