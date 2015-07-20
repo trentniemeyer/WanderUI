@@ -37,12 +37,28 @@ Calaca.factory('calacaService', ['$q', 'esFactory', '$location', function($q, el
                           
                           "function_score": {
                             "query": {
-                              "multi_match": {
-                            "query": query.general,
-                            "type": "best_fields", 
-                            "fields": ["title^2", "body"],
-                            "minimum_should_match": "100%"
-                          }  
+                              "bool": {
+                                "should": [
+                                  {
+                                    "multi_match": {
+                                      "query": query.general,
+                                      "type": "best_fields", 
+                                      "fields": ["title", "body"],
+                                      "minimum_should_match": "100%"
+                                    }
+                                  },
+                                  {
+                                    "match_phrase": {
+                                      "title": query.general
+                                    }
+                                  },
+                                  {
+                                    "match_phrase": {
+                                      "body": query.general
+                                    }
+                                  }
+                                ]
+                              }                             
                             },                              
                             "functions": [
                               { 
@@ -53,12 +69,12 @@ Calaca.factory('calacaService', ['$q', 'esFactory', '$location', function($q, el
                                     "decay": 0.5
                                   }},
                                   
-                                  "linear": {
-                                    "length": {
-                                      "origin": 10000,
-                                      "scale": 5000,
-                                      "decay": 0.5
-                                    }}
+                              "linear": {
+                                "length": {
+                                  "origin": 500,
+                                  "scale": 100,
+                                  "decay": 0.9
+                                }}
                               }
                             ],
                             "boost_mode": "sum"
