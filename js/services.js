@@ -33,8 +33,7 @@ Calaca.factory('calacaService', ['$q', 'esFactory', '$location', function($q, el
                     "from": offset,
                     "query": {
                       "filtered": {
-                        "query": {
-                          
+                        "query": {                          
                           "function_score": {
                             "query": {
                               "bool": {
@@ -43,7 +42,7 @@ Calaca.factory('calacaService', ['$q', 'esFactory', '$location', function($q, el
                                     "multi_match": {
                                       "query": query.general,
                                       "type": "best_fields", 
-                                      "fields": ["title", "body"],
+                                      "fields": ["title", "body", "city", "state"],
                                       "minimum_should_match": "100%"
                                     }
                                   },
@@ -60,25 +59,25 @@ Calaca.factory('calacaService', ['$q', 'esFactory', '$location', function($q, el
                                 ]
                               }                             
                             },                              
+                            
                             "functions": [
-                              { 
-                                "linear": {
+                              {
+                                "script_score": {
+                                  "script": "_score * (Math.min (doc['length'].value, 5000)*0.0001)"
+                                }
+                              }
+                               ,{
+                              "exp": {
                                   "postdate": {
                                     "origin": "now",
-                                    "scale": "90d",
-                                    "decay": 0.5
-                                  }},
-                                  
-                              "linear": {
-                                "length": {
-                                  "origin": 500,
-                                  "scale": 100,
-                                  "decay": 0.9
-                                }}
+                                    "scale": "180d",
+                                    "offset": "180d", 
+                                    "decay": 0.2
+                                  }}
                               }
-                            ],
-                            "boost_mode": "sum"
-                            
+                            ]
+                            ,"boost_mode": "replace"
+
                           }
                         },
                         "filter": {
