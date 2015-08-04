@@ -40,7 +40,7 @@ Calaca.factory('calacaService', ['$q', 'esFactory', '$location', function($q, el
                                 "should": [
                                   {
                                     "multi_match": {
-                                      "query": query.general,
+                                      "query": query.general.toLowerCase (),
                                       "type": "best_fields", 
                                       "fields": ["title", "body", "city", "state"],
                                       "minimum_should_match": "100%"
@@ -66,22 +66,14 @@ Calaca.factory('calacaService', ['$q', 'esFactory', '$location', function($q, el
                                   "script": "_score * (Math.min (doc['length'].value, 5000)*0.0001)"
                                 }
                               }
-                               ,{
-                              "exp": {
-                                  "postdate": {
-                                    "origin": "now",
-                                    "scale": "180d",
-                                    "offset": "180d", 
-                                    "decay": 0.2
-                                  }}
-                              }
+                               
                             ]
                             ,"boost_mode": "replace"
 
                           }
                         },
                         "filter": {
-                          "term": {"country": query.country,"_cache": true}
+                          "term": {"country": query.country.toLowerCase (),"_cache": true}
                         }
                       }
                     },
@@ -113,12 +105,13 @@ Calaca.factory('calacaService', ['$q', 'esFactory', '$location', function($q, el
                     highlight = hitsIn[i].highlight;
                     if (highlight && "body" in highlight)
                     {
-                        source.body = '...' + highlight.body[0].substring(0, 150) + '... ';
+
+                        source.body = '...' + highlight.body[0]+ '... ';
                         if (highlight.body.length > 1)
                         {                               
                             for (var j = 1; j < highlight.body.length; j++)
-                                source.body += highlight.body[j].substring (0, 150) + '... ';
-                        }
+                                source.body += highlight.body[j] + '... ';
+                        }                        
                     }
                     else
                     {
