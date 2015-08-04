@@ -52,7 +52,13 @@ Calaca.controller('calacaCtrl', ['calacaService', '$scope', '$location', functio
           "Nigeria",          
           "Swaziland",
           "Madagascar",
-          "Congo"
+          "Congo",
+
+          "Sierra Leone",
+          "Sudan",
+          "Burundi",
+          "Guinea",
+          "Seychelles"
         ];
 
         var paginationTriggered;
@@ -69,7 +75,7 @@ Calaca.controller('calacaCtrl', ['calacaService', '$scope', '$location', functio
         }
 
          $scope.countryChanged = function  ($event) {              
-            if ( typeof $scope.query.general !== '' && $scope.query.country !== '' && $event.keyCode === 13)
+            if ( $scope.query.general !== '')
             {
                 clearTimeout(searchTimeout);
                 searchTimeout = setTimeout(function() {

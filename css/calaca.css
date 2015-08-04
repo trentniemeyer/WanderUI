@@ -29,6 +29,12 @@ margin: 0 auto -39px;
 height: 39px;
 margin-left:3px;
 }
+input[disabled]
+{
+  /* Your CSS Styles */
+  background-color:#F0F0F0 !important; 
+  color:#303030 !important;
+}
 
 
 /* Header */

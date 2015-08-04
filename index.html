@@ -46,11 +46,12 @@
        
           <div style="display:inline;float:left;height:100%;margin-right:10px">
             <input type='text' class='search-box searchbox-interests' placeholder='General Search' autofocus ng-model='query.general' ng-change='delayedSearch(0)'>           
-          </div>
-        <!--<input type="text" class="search-box searchbox-country" placeholder="Which Country?" ng-model='query.country' ng-change='countryChanged(0)'>-->
-
+          </div>        
           <div mass-autocomplete style="height:100%">
-            <input mass-autocomplete-item="autocomplete_options" class="search-box searchbox-country" placeholder="Which Country?" ng-model='query.country' ng-keydown='countryChanged($event)'>
+            <input mass-autocomplete-item="autocomplete_options" class="search-box searchbox-country" placeholder="Which Country?" ng-model='query.country' ng-keydown='countryChanged($event)'
+            ng-disabled="query.general == ''"
+            
+            >
          </div>
       </div>
     </header>
