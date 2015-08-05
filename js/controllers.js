@@ -72,6 +72,19 @@ Calaca.controller('calacaCtrl', ['calacaService', '$scope', '$location', functio
           $scope.search(0)
         }
 
+        $scope.trackengagment = function (url, title, index) {          
+           
+            page = ($scope.offset/maxResultsSize) + 1
+            resultIndex = $scope.offset + index + 1
+
+            mixpanel.track("LinkClick", 
+              {
+                "Country": $scope.query.country, "General": $scope.query.general, "Page" : page,
+                "ResultIndex": resultIndex, "Url": url, "Title":title, 
+              }
+            );
+        }
+
         $scope.delayedSearch = function(mode) {
             clearTimeout(searchTimeout);
             searchTimeout = setTimeout(function() {
@@ -115,9 +128,11 @@ Calaca.controller('calacaCtrl', ['calacaService', '$scope', '$location', functio
                 searchEnded = new Date ();
                 wireTimeTook = searchEnded.getTime() - searchStarted.getTime();
 
+                page = ($scope.offset/maxResultsSize) + 1
+
                 mixpanel.track("Search", 
                   {
-                    "Country": $scope.query.country, "General": $scope.query.general, "Page" : $scope.offset,
+                    "Country": $scope.query.country, "General": $scope.query.general, "Page" : page,
                     "WireTimeTake": wireTimeTook, "RawQueryTimeTaken": a.timeTook, "Count": a.hitsCount
                   }
                 );
