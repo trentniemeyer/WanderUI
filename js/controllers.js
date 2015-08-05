@@ -67,6 +67,11 @@ Calaca.controller('calacaCtrl', ['calacaService', '$scope', '$location', functio
         var searchStarted;
         var searchEnded;
 
+        $scope.entersearch = function (term) {
+          $scope.query.general = term
+          $scope.search(0)
+        }
+
         $scope.delayedSearch = function(mode) {
             clearTimeout(searchTimeout);
             searchTimeout = setTimeout(function() {

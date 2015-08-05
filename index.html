@@ -2,7 +2,8 @@
 <html lang='en'>
 <head>
     <meta charset='utf-8'>
-    <title>Search Curated Blogs</title>
+    <title>Search Africa Travel Blogs</title>
+    <meta name="description" content="Search narraritive travel blogs focused on Africa.  The process of travel planning should be serendipitous much as travel itself is.">
     <link rel='stylesheet' type='text/css' href='css/reset.css'>
     <link rel='stylesheet' type='text/css' href='css/calaca.css'>
     <!--[if IE]>
@@ -50,7 +51,7 @@
           <div mass-autocomplete style="height:100%">
             <input mass-autocomplete-item="autocomplete_options" class="search-box searchbox-country" placeholder="Which Country?" ng-model='query.country' ng-keydown='countryChanged($event)'
             ng-disabled="query.general == ''"
-            
+
             >
          </div>
       </div>
@@ -59,11 +60,37 @@
     <!-- Listing of search results -->
     <main class='results-container' ng-cloak>
       <section class='results-info'>
-        <p id='response-details' >{{(hits | number) || 0}} {{resultsLabel || 'results'}} ({{(timeTook || 0)}}ms)</p>
+        <p id='response-details' >{{(hits | number) || 0}} {{resultsLabel || 'results'}} by <span style="font-style: italic;">relevance</span> ({{(timeTook || 0)}}ms)</p>
         <p ng-show='paginationEnabled()' id='pagination-details'>Showing {{paginationLowerBound}} - {{paginationUpperBound}}</p>
       </section>
       <section class='results'>
-        <p class='no-results' ng-show='!results.length && !loading'></p>
+        <div class='no-results' ng-show='!results.length && !loading' >
+          <p style="color:#aabd16;padding-top:10px">Popular Africa Travel Topics</p>      
+            <p style="text-align:left;font-size:15px;padding-bottom:5px;padding-left:15px;">
+              <a href='' style="color:grey;font-style: italic;" ng-click="entersearch ('Safari Animals')">- "Safari Animals"</a>
+            </p>          
+            <p style="text-align:left;font-size:15px;padding-bottom:5px;padding-left:15px;">
+              <a href='' style="color:grey;font-style: italic;" ng-click="entersearch ('Cape Town wine tasting')">- "Cape Town wine tasting"</a>
+            </p>
+            <p style="text-align:left;font-size:15px;padding-bottom:5px;padding-left:15px;">
+              <a href='' style="color:grey;font-style: italic;" ng-click="entersearch ('Victoria Falls')">- "Victoria Falls"</a>
+            </p>
+            <p style="text-align:left;font-size:15px;padding-bottom:5px;padding-left:15px;">
+              <a href='' style="color:grey;font-style: italic;" ng-click="entersearch ('Boating on the Nile')">- "Boating on the Nile"</a>
+            </p>   
+            <p style="text-align:left;font-size:15px;padding-bottom:5px;padding-left:15px;">
+              <a href='' style="color:grey;font-style: italic;" ng-click="entersearch ('Luxor Temple')">- "Luxor Temple"</a>
+            </p>
+            <p style="text-align:left;font-size:15px;padding-bottom:5px;padding-left:15px;">
+              <a href='' style="color:grey;font-style: italic;" ng-click="entersearch ('Zanzibar Diving')">- "Zanzibar Diving"</a>
+            </p>  
+            <p style="text-align:left;font-size:15px;padding-bottom:5px;padding-left:15px;">
+              <a href='' style="color:grey;font-style: italic;" ng-click="entersearch ('Moutain Gorillas')">- "Mountain Gorillas"</a>
+            </p>
+            <p style="text-align:left;font-size:15px;padding-bottom:5px;padding-left:15px;">
+              <a href='' style="color:grey;font-style: italic;" ng-click="entersearch ('Serengeti and Ngorongoro Crater')">- "Serengeti and Ngorongoro Crater"</a>
+            </p>                                           
+        </div>
         <article class='result' ng-repeat='result in results track by $id(result)'>
           <div style="float:left;width:150px;">
             <img style="max-width:150px;max-height:150px;" src="http://wanderight.blob.core.windows.net/blogparse/images/{{result._id}}" on-error-src="https://lh3.googleusercontent.com/eUXQi-EUdjmD-ieE8EtWLX4z_iLdxqM3pLP6rNSRPA=s150-no">
