@@ -106,11 +106,11 @@ Calaca.factory('calacaService', ['$q', 'esFactory', '$location', function($q, el
                     if (highlight && "body" in highlight)
                     {
 
-                        source.body = '...' + highlight.body[0]+ '... ';
+                        source.body = '...' + highlight.body[0].substring(0, 300)+ '... ';
                         if (highlight.body.length > 1)
                         {                               
                             for (var j = 1; j < highlight.body.length; j++)
-                                source.body += highlight.body[j] + '... ';
+                                source.body += highlight.body[j].substring(0, 300) + '... ';
                         }                        
                     }
                     else
