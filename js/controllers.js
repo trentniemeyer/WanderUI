@@ -14,7 +14,7 @@
  *
  TODO: Try Google AutoComplete for Country: http://plnkr.co/edit/il2J8qOI2Dr7Ik1KHRm8?p=preview
 */
-Calaca.controller('calacaCtrl', ['calacaService', '$scope', '$location', function(results, $scope, $location){
+Calaca.controller('calacaCtrl', ['calacaService', '$scope', '$http', '$location', function(results, $scope, $http, $location){
 
         //Init empty array
         $scope.results = [];
@@ -29,6 +29,7 @@ Calaca.controller('calacaCtrl', ['calacaService', '$scope', '$location', functio
           "Morocco",
           "Kenya",
           "Ghana",
+          "Croatia",
           "Tanzania",
           "Tunisia",
           "Namibia",
@@ -67,9 +68,31 @@ Calaca.controller('calacaCtrl', ['calacaService', '$scope', '$location', functio
         var searchStarted;
         var searchEnded;
 
-        $scope.entersearch = function (term) {
+        $scope.entersearch = function (term, country) {
           $scope.query.general = term
+          if (country)
+            $scope.query.country = country
           $scope.search(0)
+        }
+
+        $scope.findhighlights = function (result) {
+
+          $http.get('http://127.0.0.1:5000/positivestatements/'+result._id).
+            then(function(response) {
+                            
+              if (response.data)
+              {
+                result.highlights = [];
+                for (var i in response.data)
+                  result.highlights.push (response.data[i])
+              } 
+            }, function(response) {
+              // called asynchronously if an error occurs
+              // or server returns response with an error status.
+              console.error (response)
+            });
+
+
         }
 
         $scope.trackengagment = function (url, title, index) {          

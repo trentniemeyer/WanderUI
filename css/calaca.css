@@ -156,7 +156,7 @@ a:-webkit-any-link{
   margin-bottom: 10px;
   padding: 10px;
   border-bottom: 10px solid #ecf0f1;
-  height: 150px;
+  /*height: 150px;*/
 }
 .result h2 {
   font-size: 20px;

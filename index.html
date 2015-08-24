@@ -66,42 +66,53 @@
       </section>
       <section class='results'>
         <div class='no-results' ng-show='!results.length && !loading' >
-          <p style="color:#aabd16;padding-top:10px">Popular Africa Travel Topics</p>      
+          <p style="color:#aabd16;padding-top:10px">Popular Croatia Travel Topics</p>
+
             <p style="text-align:left;font-size:15px;padding-bottom:5px;padding-left:15px;">
-              <a href='' style="color:grey;font-style: italic;" ng-click="entersearch ('Safari Animals')">- "Safari Animals"</a>
-            </p>          
-            <p style="text-align:left;font-size:15px;padding-bottom:5px;padding-left:15px;">
-              <a href='' style="color:grey;font-style: italic;" ng-click="entersearch ('Cape Town wine tasting')">- "Cape Town wine tasting"</a>
+              <a href='' style="color:grey;font-style: italic;" ng-click="entersearch ('Boat Tour', 'Croatia')">- "Boat Tour"</a>
             </p>
+
+            <br/>
+
             <p style="text-align:left;font-size:15px;padding-bottom:5px;padding-left:15px;">
-              <a href='' style="color:grey;font-style: italic;" ng-click="entersearch ('Victoria Falls')">- "Victoria Falls"</a>
+              <a href='' style="color:grey;font-style: italic;" ng-click="entersearch ('Sailing Islands', 'Croatia')">- "Sailing Islands"</a>
             </p>
+
+            <br/>
             <p style="text-align:left;font-size:15px;padding-bottom:5px;padding-left:15px;">
-              <a href='' style="color:grey;font-style: italic;" ng-click="entersearch ('Boating on the Nile')">- "Boating on the Nile"</a>
-            </p>   
-            <p style="text-align:left;font-size:15px;padding-bottom:5px;padding-left:15px;">
-              <a href='' style="color:grey;font-style: italic;" ng-click="entersearch ('Luxor Temple')">- "Luxor Temple"</a>
+              <a href='' style="color:grey;font-style: italic;" ng-click="entersearch ('Plitvice Lakes', 'Croatia')">- "Plitvice Lakes"</a>
             </p>
+            <br/>
             <p style="text-align:left;font-size:15px;padding-bottom:5px;padding-left:15px;">
-              <a href='' style="color:grey;font-style: italic;" ng-click="entersearch ('Zanzibar Diving')">- "Zanzibar Diving"</a>
-            </p>  
-            <p style="text-align:left;font-size:15px;padding-bottom:5px;padding-left:15px;">
-              <a href='' style="color:grey;font-style: italic;" ng-click="entersearch ('Mountain Gorillas')">- "Mountain Gorillas"</a>
+              <a href='' style="color:grey;font-style: italic;" ng-click="entersearch ('Diocletian\'s Palace', 'Croatia')">- "Diocletian's Palace"</a>
             </p>
+            <br/>
+
+            <p style="color:#aabd16;padding-top:10px">Unique Travel Topics</p>
+
             <p style="text-align:left;font-size:15px;padding-bottom:5px;padding-left:15px;">
-              <a href='' style="color:grey;font-style: italic;" ng-click="entersearch ('Serengeti and Ngorongoro Crater')">- "Serengeti and Ngorongoro Crater"</a>
-            </p>                                           
-            <p style="text-align:left;font-size:15px;padding-bottom:5px;padding-left:15px;">
-              <a href='' style="color:grey;font-style: italic;" ng-click="entersearch ('Shark Diving')">- "Shark Diving"</a>
+              <a href='' style="color:grey;font-style: italic;" ng-click="entersearch ('Zip Lining', 'Croatia')">- "Zip Lining"</a>
             </p>
+            <br/>
+            <p style="text-align:left;font-size:15px;padding-bottom:5px;padding-left:15px;">
+              <a href='' style="color:grey;font-style: italic;" ng-click="entersearch ('Blue Cave', 'Croatia')">- "Blue Cave"</a>
+            </p>
+            <br/>
+
         </div>
         <article class='result' ng-repeat='result in results track by $id(result)'>
           <div style="float:left;width:150px;">
-            <img style="max-width:150px;max-height:150px;" src="http://wanderight.blob.core.windows.net/blogparse/images/{{result._id}}" on-error-src="https://lh3.googleusercontent.com/eUXQi-EUdjmD-ieE8EtWLX4z_iLdxqM3pLP6rNSRPA=s150-no">
+            <img style="max-width:150px;max-height:150px;" src="http://wanderight.blob.core.windows.net/blogparsecroatia/images/{{result._id}}" on-error-src="https://lh3.googleusercontent.com/eUXQi-EUdjmD-ieE8EtWLX4z_iLdxqM3pLP6rNSRPA=s150-no">            
           </div>
           <div style="margin-left:180px;">
             <a href="{{result.url}}" target="_blank" ng-click="trackengagment (result.url, result.title, $index)"><h2>{{result.title}}</h2></a>
-            <p ng-bind-html="result.body | to_trusted"></p>
+            <p ng-bind-html="result.body | to_trusted"></p>            
+          </div>
+          <div style="clear:left;margin-left:180px;border-top: 1px solid gray;padding-top: 5px;padding-bottom:5px;color:gray;margin-top:10px">
+            <a style="color:gray;"href="" target="_blank" ng-click="findhighlights (result)">Highlights</a>
+            <ul style="margin-top:15px">
+              <li style="font-size:13px" ng-repeat="highlight in result.highlights">"{{highlight}}"</li>              
+            </ul>
           </div>
         </article>
       </section>
