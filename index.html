@@ -100,9 +100,17 @@
             <img style="max-width:150px;max-height:150px;" src="http://wanderight.blob.core.windows.net/blogparse/images/{{result._id}}" on-error-src="https://lh3.googleusercontent.com/eUXQi-EUdjmD-ieE8EtWLX4z_iLdxqM3pLP6rNSRPA=s150-no">
           </div>
           <div style="margin-left:180px;">
-            <a href="{{result.url}}" target="_blank" ng-click="trackengagment (result.url, result.title, $index)"><h2>{{result.title}}</h2></a>
+            <a href="{{result.url}}" target="_blank" ng-click="trackengagment ('LinkClick', result.url, result.title, $index)"><h2>{{result.title}}</h2></a>
             <p ng-bind-html="result.body | to_trusted"></p>
           </div>
+          <div style="margin-left:180px;border-top: 1px solid gray;padding-top: 5px;padding-bottom:5px;color:gray;margin-top:10px">
+            <a style="color:gray;"href="" target="_blank" ng-click="findhighlights (result);trackengagment ('HighlightClick', result.url, result.title, $index)">Highlights</a>
+            <ul style="margin-top:15px;list-style-type:disc">
+              <li style="font-size:13px" ng-repeat="highlight in result.highlights" >
+                <span>"{{highlight}}"</span>
+              </li>
+            </ul>
+          </div>          
         </article>
       </section>
       <section class='pagination-controls'>

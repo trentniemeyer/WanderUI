@@ -14,7 +14,7 @@
  *
  TODO: Try Google AutoComplete for Country: http://plnkr.co/edit/il2J8qOI2Dr7Ik1KHRm8?p=preview
 */
-Calaca.controller('calacaCtrl', ['calacaService', '$scope', '$location', function(results, $scope, $location){
+Calaca.controller('calacaCtrl', ['calacaService', '$scope', '$http', '$location', function(results, $scope, $http, $location){
 
         //Init empty array
         $scope.results = [];
@@ -72,17 +72,35 @@ Calaca.controller('calacaCtrl', ['calacaService', '$scope', '$location', functio
           $scope.search(0)
         }
 
-        $scope.trackengagment = function (url, title, index) {          
+        $scope.trackengagment = function (category, url, title, index) {          
            
             page = ($scope.offset/maxResultsSize) + 1
             resultIndex = $scope.offset + index + 1
 
-            mixpanel.track("LinkClick", 
+            mixpanel.track(category, 
               {
                 "Country": $scope.query.country, "General": $scope.query.general, "Page" : page,
                 "ResultIndex": resultIndex, "Url": url, "Title":title, 
               }
             );
+        }
+
+        $scope.findhighlights = function (result) {
+
+          $http.get(CALACA_CONFIGS.rest_url +'/positivestatements/'+result._id).
+            then(function(response) {
+                            
+              if (response.data)
+              {
+                result.highlights = [];
+                for (var i in response.data)
+                  result.highlights.push (response.data[i])
+              } 
+            }, function(response) {
+              // called asynchronously if an error occurs
+              // or server returns response with an error status.
+              console.error (response)
+            });
         }
 
         $scope.delayedSearch = function(mode) {
