@@ -152,11 +152,11 @@ a:-webkit-any-link{
 /* Results */
 
 /* Result */
-.result {
-  margin-bottom: 10px;
-  padding: 10px;
+.result {  
+  padding-top: 10px;
+  padding-left: 10px;
   border-bottom: 10px solid #ecf0f1;
-  min-height: 150px;
+  min-height: 170px;
 }
 .result h2 {
   font-size: 20px;

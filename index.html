@@ -98,7 +98,7 @@
         <article class='result' ng-repeat='result in results track by $id(result)'>
           <div align="center" style="float:left;width:150px;">
             <img style="max-width:150px;max-height:150px;" src="http://wanderight.blob.core.windows.net/blogparse/images/{{result._id}}" on-error-src="https://lh3.googleusercontent.com/eUXQi-EUdjmD-ieE8EtWLX4z_iLdxqM3pLP6rNSRPA=s150-no">
-            <div style='color:gray;'>{{result.author.username}}</div>
+            <div style='color:gray;font-size:11px'>{{result.author.username}}</div>
           </div>
           <div style="margin-left:180px;">
             <a href="{{result.url}}" target="_blank" ng-click="trackengagment ('LinkClick', result.url, result.title, $index)"><h2>{{result.title}}</h2></a>
