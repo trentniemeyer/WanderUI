@@ -104,8 +104,8 @@
             <a href="{{result.url}}" target="_blank" ng-click="trackengagment (result.url, result.title, $index)"><h2>{{result.title}}</h2></a>
             <p ng-bind-html="result.body | to_trusted"></p>            
           </div>
-          <div style="clear:left;margin-left:180px;border-top: 1px solid #aabd16;padding-top: 5px;padding-bottom:5px;color:#aabd16;margin-top:10px">
-            <a style="color:#aabd16;"href="" target="_blank" ng-click="findhighlights (result)">Highlights</a>
+          <div style="clear:left;margin-left:180px;border-top: 1px solid #aabd16;padding-top: 5px;padding-bottom:5px;color:gray;margin-top:10px">
+            <a style="color:gray;"href="" target="_blank" ng-click="findhighlights (result)">Highlights</a>
             <ul style="margin-top:15px">
               <li style="font-size:13px" ng-repeat="highlight in result.highlights">"{{highlight}}"</li>              
             </ul>
