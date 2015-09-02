@@ -46,15 +46,16 @@
       
       <div class='search-box-container'>               
        
-          <div style="display:inline;float:left;height:100%;margin-right:10px">
-            <input type='text' class='search-box searchbox-interests' placeholder='General Search' autofocus ng-model='query.general' ng-change='delayedSearch(0)'>           
+          <div style="display:inline;float:left;height:100%;margin-right:5px">
+            <input type='text' class='search-box searchbox-interests' placeholder='General Search' autofocus ng-model='query.general' dl-enter-key="search(0);">           
           </div>        
-          <div mass-autocomplete style="height:100%">
-            <input mass-autocomplete-item="autocomplete_options" class="search-box searchbox-country" placeholder="Which Country?" ng-model='query.country' ng-keydown='countryChanged($event)'
-            ng-disabled="query.general == ''"
-
+          <div mass-autocomplete style="height:100%;float:left;">
+            <input mass-autocomplete-item="autocomplete_options" class="search-box searchbox-country" placeholder="Which Country?" ng-model='query.country'  ng-disabled="query.general == ''"
             >
          </div>
+         <div style="vertical-align:middle;">
+          <button class="go" ng-click='search(0)'>GO</button>
+         </div>         
       </div>
     </header>
 
@@ -101,7 +102,10 @@
             <br/>                                          
             <p style="text-align:left;font-size:15px;padding-bottom:5px;padding-left:15px;">
               <a href='' style="color:grey;font-style: italic;" ng-click="entersearch ('Shark Diving')">"Shark Diving"</a>
-            </p>
+            </p>            
+        </div>
+        <div ng-show="loading" style="text-align: center">
+          <img src="../images/spinner.gif">
         </div>
         <article class='result' ng-repeat='result in results track by $id(result)'>
           <div align="center" style="float:left;width:150px;">

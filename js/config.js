@@ -23,6 +23,6 @@ var CALACA_CONFIGS = {
 	rest_url: "http://137.135.93.224:5000",
 	index_name: "blogs",
 	type: "blog",
-	size: 10,
+	size: 20,
 	search_delay: 500
 }

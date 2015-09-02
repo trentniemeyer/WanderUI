@@ -103,28 +103,12 @@ Calaca.controller('calacaCtrl', ['calacaService', '$scope', '$http', '$location'
             });
         }
 
-        $scope.delayedSearch = function(mode) {
-            clearTimeout(searchTimeout);
-            searchTimeout = setTimeout(function() {
-                $scope.search(mode)
-            }, CALACA_CONFIGS.search_delay);
-        }
-
-         $scope.countryChanged = function  ($event) {              
-            if ( $scope.query.general !== '')
-            {
-                clearTimeout(searchTimeout);
-                searchTimeout = setTimeout(function() {
-                    $scope.search(0)
-                }, CALACA_CONFIGS.search_delay);
-            }
-         }
-
         //On search, reinitialize array, then perform search and load results
         $scope.search = function(m){
+
             $scope.results = [];
             $scope.offset = m == 0 ? 0 : $scope.offset;//Clear offset if new query
-            $scope.loading = m == 0 ? false : true;//Reset loading flag if new query
+            $scope.loading = true;
 
             if(m == -1 && paginationTriggered) {
                 if ($scope.offset - maxResultsSize >= 0 ) $scope.offset -= maxResultsSize;
@@ -174,9 +158,9 @@ Calaca.controller('calacaCtrl', ['calacaService', '$scope', '$http', '$location'
                 paginationTriggered = $scope.hits > maxResultsSize ? true : false;
 
                 //Set loading flag if pagination has been triggered
-                if(paginationTriggered) {
-                    $scope.loading = true;
-                }
+                
+                $scope.loading = false;
+                
             });
         };
 

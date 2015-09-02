@@ -82,7 +82,7 @@ input[disabled]
 }
 .searchbox-interests
 {
-  width: 527px;
+  width: 487px;
 }
 
 /* Default Browser Overrides */
@@ -162,6 +162,24 @@ a:-webkit-any-link{
   background-color: #d62256;
 }
 .highlight:focus {
+  outline:0;
+}
+
+.go {
+  height: 55px;  
+  width: 45px;  
+  border-radius: 5px;  
+  background-color: #aabd16;  
+  border: none;  
+  color: #fff; 
+  margin-left:5px; 
+  font-size:15px  
+}
+.go:hover {
+  cursor: pointer;
+  background-color: #d62256;
+}
+.go:focus {
   outline:0;
 }
 
