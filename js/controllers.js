@@ -53,7 +53,6 @@ Calaca.controller('calacaCtrl', ['calacaService', '$scope', '$http', '$location'
           "Swaziland",
           "Madagascar",
           "Congo",
-
           "Sierra Leone",
           "Sudan",
           "Burundi",
@@ -125,7 +124,7 @@ Calaca.controller('calacaCtrl', ['calacaService', '$scope', '$http', '$location'
 
         //Load search results into array
         $scope.loadResults = function(m) {
-            results.search($scope.query, m, $scope.offset).then(function(a) {
+            results.search($scope.query, m, $scope.offset).then(function(a) {              
 
                 searchEnded = new Date ();
                 wireTimeTook = searchEnded.getTime() - searchStarted.getTime();
@@ -160,7 +159,13 @@ Calaca.controller('calacaCtrl', ['calacaService', '$scope', '$http', '$location'
                 //Set loading flag if pagination has been triggered
                 
                 $scope.loading = false;
-                
+
+                $scope.lastcountry = $scope.query.country;
+
+                if ($scope.lastcountry  && $scope.lastcountry != '')
+                  $scope.invalidcountry = countries.indexOf($scope.lastcountry) > -1;
+                else
+                  $scope.invalidcountry = true;                
             });
         };
 

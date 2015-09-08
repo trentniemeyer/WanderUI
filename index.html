@@ -86,9 +86,8 @@
     <!-- Page Content -->
     <main class='container' ng-cloak>        
 
-        <section class='row results-info' ng-show='results.length'>
+        <section class='row results-info' ng-show='timeTook'>           
            
-
             <div class="col-lg-7  col-md-7 col-sm-8 col-xs-8 col-lg-offset-1 col-md-offset-1">
                 <p class="response-details" >{{(hits | number) || 0}} {{resultsLabel || 'results'}} by <span style="font-style: italic;">relevance</span> ({{(timeTook || 0)}}ms)</p>                
             </div>
@@ -98,7 +97,7 @@
             <div class=" col-lg-11 col-lg-offset-1 col-md-11 col-md-offset-1 col-sm-12 col-xs-12" style="border-bottom: 1px solid #1656BD;"></div>
         </section>
 
-         <section class="row" ng-show='!results.length && !loading'>
+         <section class="row" ng-show='!results.length && !loading && !timeTook'>
                 <div align="center" class='span12'  >                
                   <br>
                   <h3 >Popular Africa Travel Topics</h3> 
@@ -144,7 +143,13 @@
                 <div  style="text-align: center" class="col-lg-10 col-lg-offset-1">
                     <img src="../images/spinnerII.gif">
                 </div>
-            </section>   
+            </section>  
+            <section class="row" ng-show='!invalidcountry && !loading'>              
+                <br>
+                <div  style="text-align: center;" class="col-lg-10 col-lg-offset-1">
+                    <span style="font-size:20px;color:#BD16A9"><b>{{lastcountry}} </b> is not a specified African country.</span>              
+                </div>              
+            </section> 
 
             <section class="row " ng-repeat='result in results track by $id(result)' >      
                 <div class="result col-lg-11 col-lg-offset-1 col-md-11 col-md-offset-1 col-sm-12 col-xs-12" >
