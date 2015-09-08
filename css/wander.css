@@ -1,0 +1,238 @@
+/*!
+ * Start Bootstrap - 1 Col Portfolio HTML Template (http://startbootstrap.com)
+ * Code licensed under the Apache License v2.0.
+ * For details, see http://www.apache.org/licenses/LICENSE-2.0.
+ */
+
+h2{
+  font-size: 50px;
+  color: #ecf0f1;
+  text-align: center;  
+}
+h5 {
+  font-size: 18px;
+  color: #ecf0f1;
+  text-align: center;  
+}
+h3 {
+	margin-top: 0px;
+	color: #aabd16;
+	font-size: 20px;
+}
+hr{
+	margin-top: 0px;
+}
+a:hover{
+	text-decoration: none;
+	border-bottom: 0px;
+}
+a:visited{
+	text-decoration: none;
+	border-bottom: 0px;
+}
+
+.jumbotron {
+  height: 300px;  
+  /*background-color: #aabd16;*/
+  background-image: url(../images/HeroImageII.jpg);
+  background-size: cover;
+  padding-top: 0px;
+  margin-bottom: 15px;
+}
+
+.customheader{
+	position: relative;
+	height: 250px;
+}
+
+
+
+@media (max-width: 550px) {
+    h2{font-size: 35px;}
+    .tiny2{
+    	width: 90%;
+    	margin-left:5%;
+    	padding-bottom:10px;    	
+    }
+    .tiny1{
+    	width: 90%;
+    	margin-left:5%;
+    	padding-bottom:10px;    	
+    }
+    #general{
+  		border-bottom-right-radius: 10px;
+  		border-top-right-radius: 10px;  		
+    }
+	#country{
+		border-bottom-left-radius: 10px;
+	  	border-top-left-radius: 10px;
+	}    
+
+}
+
+.search-row
+{
+	bottom:0;
+	right:0;
+	left:0;
+	position: absolute;
+	padding-top:5px;
+}
+
+.search-general-div{	
+	padding-left:0px;
+    padding-right:0px;
+	padding-bottom:10px;
+}
+.search-box {  
+  outline: 0;
+  border-radius: 10px;    
+}
+.search-general{
+	border-bottom-right-radius: 0px;
+  border-top-right-radius: 0px;
+}
+.search-country{
+	border-bottom-left-radius: 0px;
+  border-top-left-radius: 0px;
+}
+
+.go {      
+  background-color: #1656BD;  
+  border-radius: 10px;
+  border: 1px solid #1656BD;
+  color: #fff;
+}
+.go:hover {  
+  background-color: #aabd16;
+  border: 1px solid #aabd16;
+  color: #fff;
+}
+.go:focus {
+  outline:0;
+    background-color: #aabd16;
+  border: 1px solid #aabd16;
+  color: #fff;
+}
+.highlight {      
+    background-color: #1656BD;
+  border: 1px solid #1656BD;
+  color: #fff;
+
+}
+.highlight:hover {  
+background-color: #aabd16;    
+  border: 1px solid #aabd16;
+  color: #fff;
+}
+.highlight:focus {
+  outline:0;
+    background-color: #aabd16;
+  border: 1px solid #aabd16;
+  color: #fff;
+}
+
+.pop-topic
+{	
+	font-size:15px;
+	padding-bottom:5px;
+	padding-left:15px;
+}
+
+.response-details{  
+  font-size: .95em;
+  color: grey;
+}
+.result {   
+  border-bottom: 15px solid #ecf0f1;    
+  padding-top:15px;  
+}
+.result-img{
+	float:left;
+	display: inline-block;
+	border:2px; 
+	margin: 4px 15px 5px 0%;
+	width: 150px;	
+}
+
+.author-name{
+	color:gray;
+	font-size:11px;
+}
+
+.pagination-controls {  
+  height: 30px;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+.pager {
+  height: 30px;
+  width: 75px;
+  border-radius: 25px;
+  background-color: #1656BD;
+  border: none;
+  color: #fff;
+  margin: 5px;
+}
+.pager:hover {
+  cursor: pointer;
+  background-color: #aabd16;
+}
+.pager:focus {
+  outline:0;
+    background-color: #aabd16;
+  border: 1px solid #aabd16;
+  color: #fff;
+  color: #fff;
+}
+
+.footer{	
+	right:0;
+	left:0;
+	position: absolute;
+}
+
+/* mass autocomplete */
+.ac-container {
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  -ms-backface-visibility: hidden;
+  -o-backface-visibility: hidden;
+  backface-visibility: hidden;
+  -webkit-transform: translate3d(0, 0, 0);
+  -moz-transform: translate3d(0, 0, 0);
+  -ms-transform: translate3d(0, 0, 0);
+  -o-transform: translate3d(0, 0, 0);
+  transform: translate3d(0, 0, 0);
+  z-index: 999;
+}
+.ac-container .ac-menu {
+  border: 1px solid #ccc;
+  list-style: none;
+  padding: 0;
+  background-color: white;
+  box-shadow: 0 3px 7px 0px rgba(0, 0, 0, 0.15);
+  margin: 0;
+}
+.ac-container .ac-menu .ac-menu-item {
+  border-bottom: 1px dotted #ccc;
+  line-height: 35px;
+  margin: 0;
+}
+.ac-container .ac-menu .ac-menu-item:last-child {
+  border-bottom: 0;
+}
+.ac-container .ac-menu .ac-menu-item:hover {
+  background-color: #e0eaff;
+}
+.ac-container .ac-menu a {
+  padding-left: 5px;
+  display: block;
+  color: inherit;
+  text-decoration: none;
+}
+.ac-container .ac-menu .ac-state-focus {
+  outline: none;
+  background-color: #e0eaff;
+}
