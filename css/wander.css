@@ -6,12 +6,12 @@
 
 h2{
   font-size: 50px;
-  color: #ecf0f1;
+  color: #fff;
   text-align: center;  
 }
 h5 {
   font-size: 18px;
-  color: #ecf0f1;
+  color: #fff;
   text-align: center;  
 }
 h3 {
@@ -143,8 +143,7 @@ background-color: #aabd16;
   font-size: .95em;
   color: grey;
 }
-.result {   
-  border-bottom: 15px solid #ecf0f1;    
+.result {     
   padding-top:15px;  
 }
 .result-img{

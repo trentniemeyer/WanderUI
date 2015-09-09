@@ -43,7 +43,7 @@
 
 </head>
 
-<body ng-app='calaca' ng-controller='calacaCtrl' style="background-color:#ecf0f1">
+<body ng-app='calaca' ng-controller='calacaCtrl' style="background-color:#fff">
 
         <!-- Welcome banner -->
     <header class="jumbotron">
@@ -140,7 +140,7 @@
                 </div>                 
             </section>
             <section class="row" ng-show="loading">
-                <div  style="text-align: center" class="col-lg-10 col-lg-offset-1">
+                <div  style="text-align: center" class="span12">
                     <img src="../images/spinnerII.gif">
                 </div>
             </section>  
@@ -183,9 +183,6 @@
         <section class='row pagination-controls'>
                 <button ng-click='search(-1)' ng-show='paginationEnabled() && offset !== 0' class='pager'>Previous</button><button ng-click='search(1)' ng-show='paginationEnabled()' class='pager'>Next</button>
         </section>
-
-        <hr>
-
 
     </main>
     <!-- /.container -->
