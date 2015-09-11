@@ -54,7 +54,6 @@ Calaca.controller('calacaCtrl', ['calacaService', '$scope', '$http', '$location'
           "Swaziland",
           "Madagascar",
           "Congo",
-
           "Sierra Leone",
           "Sudan",
           "Burundi",
@@ -75,9 +74,22 @@ Calaca.controller('calacaCtrl', ['calacaService', '$scope', '$http', '$location'
           $scope.search(0)
         }
 
+        $scope.trackengagment = function (category, url, title, index) {          
+           
+            page = ($scope.offset/maxResultsSize) + 1
+            resultIndex = $scope.offset + index + 1
+
+            mixpanel.track(category, 
+              {
+                "Country": $scope.query.country, "General": $scope.query.general, "Page" : page,
+                "ResultIndex": resultIndex, "Url": url, "Title":title, 
+              }
+            );
+        }
+
         $scope.findhighlights = function (result) {
 
-          $http.get('http://127.0.0.1:5000/positivestatements/'+result._id).
+          $http.get(CALACA_CONFIGS.rest_url +'/positivestatements/'+result._id).
             then(function(response) {
                             
               if (response.data)
@@ -91,45 +103,14 @@ Calaca.controller('calacaCtrl', ['calacaService', '$scope', '$http', '$location'
               // or server returns response with an error status.
               console.error (response)
             });
-
-
         }
-
-        $scope.trackengagment = function (url, title, index) {          
-           
-            page = ($scope.offset/maxResultsSize) + 1
-            resultIndex = $scope.offset + index + 1
-
-            mixpanel.track("LinkClick", 
-              {
-                "Country": $scope.query.country, "General": $scope.query.general, "Page" : page,
-                "ResultIndex": resultIndex, "Url": url, "Title":title, 
-              }
-            );
-        }
-
-        $scope.delayedSearch = function(mode) {
-            clearTimeout(searchTimeout);
-            searchTimeout = setTimeout(function() {
-                $scope.search(mode)
-            }, CALACA_CONFIGS.search_delay);
-        }
-
-         $scope.countryChanged = function  ($event) {              
-            if ( $scope.query.general !== '')
-            {
-                clearTimeout(searchTimeout);
-                searchTimeout = setTimeout(function() {
-                    $scope.search(0)
-                }, CALACA_CONFIGS.search_delay);
-            }
-         }
 
         //On search, reinitialize array, then perform search and load results
         $scope.search = function(m){
+
             $scope.results = [];
             $scope.offset = m == 0 ? 0 : $scope.offset;//Clear offset if new query
-            $scope.loading = m == 0 ? false : true;//Reset loading flag if new query
+            $scope.loading = true;
 
             if(m == -1 && paginationTriggered) {
                 if ($scope.offset - maxResultsSize >= 0 ) $scope.offset -= maxResultsSize;
@@ -146,7 +127,7 @@ Calaca.controller('calacaCtrl', ['calacaService', '$scope', '$http', '$location'
 
         //Load search results into array
         $scope.loadResults = function(m) {
-            results.search($scope.query, m, $scope.offset).then(function(a) {
+            results.search($scope.query, m, $scope.offset).then(function(a) {              
 
                 searchEnded = new Date ();
                 wireTimeTook = searchEnded.getTime() - searchStarted.getTime();
@@ -179,9 +160,15 @@ Calaca.controller('calacaCtrl', ['calacaService', '$scope', '$http', '$location'
                 paginationTriggered = $scope.hits > maxResultsSize ? true : false;
 
                 //Set loading flag if pagination has been triggered
-                if(paginationTriggered) {
-                    $scope.loading = true;
-                }
+                
+                $scope.loading = false;
+
+                $scope.lastcountry = $scope.query.country;
+
+                if ($scope.lastcountry  && $scope.lastcountry != '')
+                  $scope.invalidcountry = countries.indexOf($scope.lastcountry) > -1;
+                else
+                  $scope.invalidcountry = true;                
             });
         };
 

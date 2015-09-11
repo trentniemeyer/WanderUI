@@ -20,8 +20,9 @@
 
 var CALACA_CONFIGS = {
 	url: "http://localhost:9200",
+	rest_url: "http://127.0.0.1:5000",
 	index_name: "blogs",
 	type: "blog",
-	size: 10,
+	size: 20,
 	search_delay: 500
 }
